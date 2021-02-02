@@ -1,15 +1,10 @@
 #!/usr/bin/with-contenv bash
 
 # create TUN device
-if [ ! -c /dev/net/tun ]; then
+[[ ! -c /dev/net/tun ]] &&
 	mknod /dev/net/tun c 10 200
-fi
 chmod 666 /dev/net/tun
 
-chown -fR abc:abc \
-	'/var/run/openvpn' || :
-chmod -fR a=,ug+rwX \
-	'/var/run/openvpn' || :
 openvpn \
 	--mktun --dev 'tun0' --dev-type 'tun' \
 	--user abc --group abc

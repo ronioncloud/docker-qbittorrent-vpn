@@ -8,16 +8,22 @@ mkdir -p \
 	/dev/net
 
 # write credentials to file
-[[ ! -f /config/openvpn/credentials.txt ]] &&
-	printf "${OPENVPN_USERNAME:-username}\n${OPENVPN_PASSWORD:-password}" >/config/openvpn/credentials.txt
+if [ -n ${OPENVPN_USERNAME} ] && [ -n ${OPENVPN_PASSWORD} ]; then
+	printf "${OPENVPN_USERNAME}\n${OPENVPN_PASSWORD}" >/config/openvpn/credentials.txt
+elif [ -f /config/openvpn/credentials.txt ]; then
+	printf "username\npassword" >/config/openvpn/credentials.txt
+fi
 
 # set nameserver
 echo "nameserver ${DNS}" >/etc/resolv.conf
 
 # permissions
 chown -R abc:abc \
-	/config
+	/config \
+	/var/run/openvpn
 chmod 600 /config/openvpn/credentials.txt
+chmod -fR a=,ug+rwX \
+	/var/run/openvpn || :
 chmod 755 \
 	/usr/sbin/* \
 	/etc/openvpn/modify-openvpn-config.sh
