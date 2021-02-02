@@ -37,21 +37,6 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
 
-      - name: Build The Docker Image For Testing
-        run: |
-          docker build \
-            --build-arg VERSION=$(curl -sX GET "https://api.github.com/repos/hydazz/docker-qbittorrent-vpn/releases/latest" | jq -r .tag_name) \
-            --tag vcxpz/ci-build:ci-build \
-            --build-arg TAG=latest \
-            --file Dockerfile .
-
-      - name: Test The Docker Image
-        run: |
-          export IMAGE="vcxpz/ci-build:ci-build"
-          export TEST_SEARCH="Initialization Sequence Completed"
-          export RUN_ARGS="-e DEBUG=true"
-          curl -sSL https://raw.githubusercontent.com/hydazz/docker-utils/main/docker/docker-ci.sh | bash
-
       - name: Build And Push The Docker Image
         run: |
           docker buildx build \
@@ -66,7 +51,7 @@ jobs:
 
       - name: Get New Package Versions From Image
         run: |
-          docker run --rm --entrypoint /bin/sh -v ${PWD}:/tmp vcxpz/ci-build:ci-build -c '\
+          docker run --rm --entrypoint /bin/sh -v ${PWD}:/tmp vcxpz/qbittorrent-vpn:latest -c '\
             apk info -v | sort >/tmp/package_versions.txt'
 
       - name: Commit And Push Changes To Github
