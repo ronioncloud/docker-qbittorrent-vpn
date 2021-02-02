@@ -1,0 +1,23 @@
+#!/usr/bin/with-contenv bash
+
+# create configuration directory
+mkdir -p \
+	/config/qBittorrent/config/ \
+	/config/openvpn \
+	/var/run/openvpn \
+	/dev/net
+
+# write credentials to file
+[[ ! -f /config/openvpn/credentials.txt ]] &&
+	printf "${OPENVPN_USERNAME:-username}\n${OPENVPN_PASSWORD:-password}" >/config/openvpn/credentials.txt
+
+# set nameserver
+echo "nameserver ${DNS}" >/etc/resolv.conf
+
+# permissions
+chown -R abc:abc \
+	/config
+chmod 600 /config/openvpn/credentials.txt
+chmod 755 \
+	/usr/sbin/* \
+	/etc/openvpn/modify-openvpn-config.sh

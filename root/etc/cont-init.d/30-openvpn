@@ -1,0 +1,59 @@
+#!/usr/bin/with-contenv bash
+
+# create TUN device
+if [ ! -c /dev/net/tun ]; then
+	mknod /dev/net/tun c 10 200
+fi
+chmod 666 /dev/net/tun
+
+chown -fR abc:abc \
+	'/var/run/openvpn' || :
+chmod -fR a=,ug+rwX \
+	'/var/run/openvpn' || :
+openvpn \
+	--mktun --dev 'tun0' --dev-type 'tun' \
+	--user abc --group abc
+
+# check if VPN provider was defined
+if [ -z "${OPENVPN_PROVIDER}" ]; then
+	echo "OpenVPN provider not set. Using configuration at /config/openvpn/config.ovpn"
+	# if not fallback to given VPN configuration
+
+else
+	echo "INFO: Trying to use OpenVPN provider: ${OPENVPN_PROVIDER}"
+
+	# build base URL for downloading VPN configuration
+	lowercase_openvpn_provider=$(echo "${OPENVPN_PROVIDER}" | awk '{print tolower($0)}')
+
+	# Download all OpenVPN configurations from this provider
+	(
+		cd "/etc/openvpn"
+		svn export "https://github.com/haugene/docker-transmission-openvpn.git/trunk/openvpn/${lowercase_openvpn_provider}" --force
+	)
+
+	if [ -x "/etc/openvpn/${lowercase_openvpn_provider}/configure-openvpn.sh" ]; then
+		echo "Provider ${OPENVPN_PROVIDER} has a custom startup script, executing it"
+
+		VPN_PROVIDER_HOME="/etc/openvpn/${lowercase_openvpn_provider}" . "/etc/openvpn/${lowercase_openvpn_provider}/configure-openvpn.sh"
+	fi
+
+	# determine which configuration from the provider we are going to use
+	# NOTE: some providers have a "default.ovpn", other do not
+	OPENVPN_CONFIG_FILENAME="${OPENVPN_CONFIG:-default}.ovpn"
+	DOWNLOADED_OPENVPN_CONFIG_FILE="/etc/openvpn/${lowercase_openvpn_provider}/${OPENVPN_CONFIG_FILENAME}"
+
+	# check if configuration exists for given provider
+	if [ ! -f "${DOWNLOADED_OPENVPN_CONFIG_FILE}" ]; then
+		echo "ERROR: Could not find OpenVPN configuration \"${OPENVPN_CONFIG}\" for provider ${OPENVPN_PROVIDER}"
+		exit 1
+	else
+		echo "INFO: Found OpenVPN configuration: \"${OPENVPN_CONFIG}\" for provider \"${OPENVPN_PROVIDER}\" using it"
+	fi
+
+	# modify permissions for downloaded config files
+	find "/etc/openvpn/${lowercase_openvpn_provider}" -type d -exec chmod 755 {} +
+	find "/etc/openvpn/${lowercase_openvpn_provider}" -type f -exec chmod 644 {} +
+
+	# Copy the selected configuration to the expected location
+	cp -p "${DOWNLOADED_OPENVPN_CONFIG_FILE}" /config/openvpn/config.ovpn
+fi
