@@ -8,7 +8,7 @@ LABEL build_version="qBittorrent version:- ${VERSION} Build-date:- ${BUILD_DATE}
 LABEL maintainer="hydaz"
 
 ENV QBT_WEBUI_PORT=8080 \
-	LAN=192.168.0.0/24 \
+	LAN=192.168.0.0/16 \
 	DOCKER_CIDR=172.17.0.0/16 \
 	DNS=1.1.1.1 \
 	S6_BEHAVIOUR_IF_STAGE2_FAILS=2
