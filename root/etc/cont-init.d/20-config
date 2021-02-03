@@ -10,8 +10,10 @@ mkdir -p \
 # write credentials to file
 if [ -n ${OPENVPN_USERNAME} ] && [ -n ${OPENVPN_PASSWORD} ]; then
 	printf "${OPENVPN_USERNAME}\n${OPENVPN_PASSWORD}" >/config/openvpn/credentials.txt
-elif [ -f /config/openvpn/credentials.txt ]; then
+elif [ ! -f /config/openvpn/credentials.txt ]; then
 	printf "username\npassword" >/config/openvpn/credentials.txt
+	echo "OpenVPN username and password was not specified in the 'OPENVPN_USERNAME' or 'OPENVPN_PASSWORD' variables. Set these variables or modify the '/config/openvpn/credentials.txt' file."
+	sleep infinity
 fi
 
 # set nameserver
