@@ -9,7 +9,7 @@ busybox-1.33.0-r1
 ca-certificates-20191127-r5
 ca-certificates-bundle-20191127-r5
 coreutils-8.32-r2
-curl-7.74.0-r0
+curl-7.75.0-r0
 dbus-libs-1.12.20-r1
 expat-2.2.10-r1
 fts-1.2.7-r1
@@ -28,7 +28,7 @@ libblkid-2.36.1-r1
 libbz2-1.0.8-r1
 libc-utils-0.7.2-r3
 libcrypto1.1-1.1.1i-r0
-libcurl-7.74.0-r0
+libcurl-7.75.0-r0
 libelf-0.182-r1
 libffi-3.3-r2
 libgcc-10.2.1_pre1-r3
@@ -49,8 +49,8 @@ lz4-libs-1.9.3-r0
 lzo-2.10-r2
 musl-1.2.2-r1
 musl-utils-1.2.2-r1
-ncurses-libs-6.2_p20210123-r0
-ncurses-terminfo-base-6.2_p20210123-r0
+ncurses-libs-6.2_p20210130-r0
+ncurses-terminfo-base-6.2_p20210130-r0
 nghttp2-libs-1.43.0-r0
 oniguruma-6.9.6-r0
 openvpn-2.5.0-r1
@@ -60,7 +60,7 @@ qbittorrent-nox-4.3.1-r1
 qt5-qtbase-5.15.2-r1
 readline-8.1.0-r0
 s6-ipcserver-2.10.0.1-r0
-scanelf-1.2.8-r0
+scanelf-1.2.9-r0
 serf-1.3.9-r5
 shadow-4.8.1-r0
 skalibs-2.10.0.1-r0
