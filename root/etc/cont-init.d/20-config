@@ -26,6 +26,3 @@ chown -R abc:abc \
 chmod 600 /config/openvpn/credentials.txt
 chmod -fR a=,ug+rwX \
 	/var/run/openvpn || :
-chmod 755 \
-	/usr/sbin/* \
-	/etc/openvpn/modify-openvpn-config.sh

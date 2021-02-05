@@ -19,4 +19,4 @@ else
 fi
 echo "calculated port $new_port"
 
-/usr/sbin/set_qbittorrent_port_forwarding.sh "${new_port}"
+/usr/bin/set_qbittorrent_port_forwarding.sh "${new_port}"

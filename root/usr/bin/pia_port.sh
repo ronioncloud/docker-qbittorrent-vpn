@@ -74,4 +74,4 @@ if [ -z "$new_port" ]; then
 fi
 echo "Got new port $new_port from PIA"
 
-/usr/sbin/set_qbittorrent_port_forwarding.sh "${new_port}"
+/usr/bin/set_qbittorrent_port_forwarding.sh "${new_port}"

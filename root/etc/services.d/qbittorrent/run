@@ -17,10 +17,10 @@ done
 
 if [ "${OPENVPN_PROVIDER}" = "PIA" ]; then
 	echo "INFO: configuring port forwarding for ${OPENVPN_PROVIDER}"
-	/usr/sbin/pia_port.sh
+	/usr/bin/pia_port.sh
 elif [ "${OPENVPN_PROVIDER}" = "PRIVATEVPN" ]; then
 	echo "INFO: configuring port forwarding for ${OPENVPN_PROVIDER}"
-	/usr/sbin/private_vpn_port.sh
+	/usr/bin/private_vpn_port.sh
 else
 	echo "INFO: no port updater for provider ${OPENVPN_PROVIDER}"
 fi

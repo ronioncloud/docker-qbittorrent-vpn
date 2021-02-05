@@ -19,7 +19,7 @@ exec s6-setuidgid abc \
 	openvpn \
 	--writepid /var/run/openvpn/pid \
 	--cd /config/openvpn/ \
-	--iproute /usr/sbin/ip-su \
+	--iproute /usr/bin/ip-su \
 	--dev tun0 --persist-tun \
 	--config /config/openvpn/config.ovpn \
 	--auth-user-pass /config/openvpn/credentials.txt \
