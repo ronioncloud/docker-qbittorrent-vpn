@@ -28,7 +28,7 @@ RUN \
 	apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
 		qbittorrent-nox && \
 	setcap cap_net_admin+ep "$(which openvpn)" && \
-	echo "abc ALL=(ALL)  NOPASSWD: /bin/ip" >>/etc/sudoers && \
+	echo "abc ALL=(ALL)  NOPASSWD: /sbin/ip" >>/etc/sudoers && \
 	echo "**** cleanup ****" && \
 	apk del --purge \
 		build-dependencies && \
