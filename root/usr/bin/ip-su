@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo /bin/ip $*
+sudo /sbin/ip $*
