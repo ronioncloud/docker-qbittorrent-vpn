@@ -4,6 +4,7 @@
 mkdir -p \
 	/config/qBittorrent/config/ \
 	/config/openvpn \
+	/config/flood \
 	/var/run/openvpn \
 	/dev/net
 
