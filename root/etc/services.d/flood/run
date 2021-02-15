@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv bash
+
+if [[ ${FLOOD_AUTH} == true ]]; then
+	FLOOD_OPTION_AUTH=default && export FLOOD_OPTION_AUTH
+	echo "qBittorrent is running on \"http://127.0.0.1:8080\" for Flood configuration."
+else
+	FLOOD_OPTION_AUTH=none && export FLOOD_OPTION_AUTH
+fi
+
+exec s6-setuidgid abc \
+	app/flood \
+	--rundir "app/flood" \
+	--host 0.0.0.0 \
+	--port 3000 \
+	--qburl "http://127.0.0.1:8080" \
+	--qbuser "admin" \
+	--qbpass "adminadmin"

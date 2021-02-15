@@ -6,6 +6,7 @@ ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="qBittorrent version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
+ARG FLOOD_VERSION="4.4.1"
 
 ENV QBT_WEBUI_PORT=8080 \
 	LAN=192.168.0.0/16 \
@@ -28,7 +29,13 @@ RUN \
 	apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
 		qbittorrent-nox && \
 	setcap cap_net_admin+ep "$(which openvpn)" && \
-	echo "abc ALL=(ALL)  NOPASSWD: /sbin/ip" >>/etc/sudoers && \
+	echo "abc ALL=(ALL) NOPASSWD: /sbin/ip" >>/etc/sudoers && \
+	echo "**** install flood ****" && \
+	curl --silent -o \
+		/app/flood -L \
+		"https://github.com/jesec/flood/releases/download/v${FLOOD_VERSION}/flood-linux-x64" && \
+	chmod +x \
+		/app/flood \
 	echo "**** cleanup ****" && \
 	apk del --purge \
 		build-dependencies && \

@@ -19,6 +19,9 @@ fi
 # set nameserver
 echo "nameserver ${DNS}" >/etc/resolv.conf
 
+[[ ! -f /config/qBittorrent/config/qBittorrent.conf ]] &&
+	cp /defaults/qBittorrent.conf /config/qBittorrent/config/qBittorrent.conf
+
 # permissions
 chown -R abc:abc \
 	/config \
