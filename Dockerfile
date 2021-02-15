@@ -1,5 +1,4 @@
-ARG TAG
-FROM vcxpz/baseimage-alpine:${TAG}
+FROM vcxpz/baseimage-alpine:latest
 
 # set version label
 ARG BUILD_DATE
@@ -32,10 +31,10 @@ RUN \
 	echo "abc ALL=(ALL) NOPASSWD: /sbin/ip" >>/etc/sudoers && \
 	echo "**** install flood ****" && \
 	curl --silent -o \
-		/app/flood -L \
+		/app/flood -fL \
 		"https://github.com/jesec/flood/releases/download/v${FLOOD_VERSION}/flood-linux-x64" && \
 	chmod +x \
-		/app/flood \
+		/app/flood && \
 	echo "**** cleanup ****" && \
 	apk del --purge \
 		build-dependencies && \
@@ -51,4 +50,4 @@ HEALTHCHECK --start-period=10s --interval=30s \
 
 # ports and volumes
 VOLUME /config
-EXPOSE 8080
+EXPOSE 3000
