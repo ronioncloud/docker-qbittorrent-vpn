@@ -55,4 +55,4 @@ HEALTHCHECK --start-period=10s --interval=30s \
 
 # ports and volumes
 VOLUME /config
-EXPOSE 3000
+EXPOSE 3000 8080
