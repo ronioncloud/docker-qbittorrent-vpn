@@ -5,7 +5,6 @@ ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="qBittorrent version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
-ARG FLOOD_VERSION="4.4.1"
 
 ENV QBT_WEBUI_PORT=8080 \
 	LAN=192.168.0.0/16 \
@@ -17,6 +16,7 @@ RUN \
 	echo "**** install build packages ****" && \
 	apk add --no-cache --virtual=build-dependencies \
 		curl \
+		jq \
 		libcap && \
 	echo "**** install runtime packages ****" && \
 	apk add --no-cache --upgrade \
@@ -35,9 +35,12 @@ RUN \
 	setcap cap_net_admin+ep "$(which openvpn)" && \
 	echo "abc ALL=(ALL) NOPASSWD: /sbin/ip" >>/etc/sudoers && \
 	echo "**** install flood ****" && \
+	if [ -z ${FLOOD_VERSION+x} ]; then \
+		FLOOD_VERSION=$(curl -sL "https://api.github.com/repos/jesec/flood/releases/latest" | jq -r '.tag_name'); \
+	fi && \
 	curl --silent -o \
 		/usr/bin/flood -fL \
-		"https://github.com/jesec/flood/releases/download/v${FLOOD_VERSION}/flood-linux-x64" && \
+		"https://github.com/jesec/flood/releases/download/${FLOOD_VERSION}/flood-linux-x64" && \
 	chmod +x \
 		/usr/bin/flood && \
 	echo "**** cleanup ****" && \

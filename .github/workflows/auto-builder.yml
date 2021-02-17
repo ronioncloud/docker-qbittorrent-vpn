@@ -43,8 +43,8 @@ jobs:
             --platform=linux/amd64 \
             --output "type=image,push=true" \
             --build-arg BUILD_DATE="$(date +%Y-%m-%d)" \
-            --build-arg VERSION=$(curl -sX GET "https://api.github.com/repos/hydazz/docker-qbittorrent-vpn/releases/latest" | jq -r .tag_name) \
-            --tag vcxpz/qbittorrent-vpn:$(curl -sX GET "https://api.github.com/repos/hydazz/docker-qbittorrent-vpn/releases/latest" | jq -r .tag_name) \
+            --build-arg VERSION=$(curl -sL "https://api.github.com/repos/hydazz/docker-qbittorrent-vpn/releases/latest" | jq -r '.tag_name') \
+            --tag vcxpz/qbittorrent-vpn:$(curl -sL "https://api.github.com/repos/hydazz/docker-qbittorrent-vpn/releases/latest" | jq -r '.tag_name') \
             --tag vcxpz/qbittorrent-vpn:latest \
             --file Dockerfile .
 
