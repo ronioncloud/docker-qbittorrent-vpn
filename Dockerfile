@@ -23,6 +23,7 @@ RUN \
 		curl \
 		iptables \
 		jq \
+		mediainfo \
 		openvpn \
 		subversion \
 		sudo && \
