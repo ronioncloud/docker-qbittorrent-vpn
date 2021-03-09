@@ -23,7 +23,6 @@ RUN \
 		curl \
 		iptables \
 		jq \
-		mediainfo \
 		openvpn \
 		subversion \
 		sudo && \
@@ -35,15 +34,6 @@ RUN \
 		qbittorrent-nox && \
 	setcap cap_net_admin+ep "$(which openvpn)" && \
 	echo "abc ALL=(ALL) NOPASSWD: /sbin/ip" >>/etc/sudoers && \
-	echo "**** install flood ****" && \
-	if [ -z ${FLOOD_VERSION+x} ]; then \
-		FLOOD_VERSION=$(curl -sL "https://api.github.com/repos/jesec/flood/releases/latest" | jq -r '.tag_name'); \
-	fi && \
-	curl --silent -o \
-		/usr/bin/flood -fL \
-		"https://github.com/jesec/flood/releases/download/${FLOOD_VERSION}/flood-linux-x64" && \
-	chmod +x \
-		/usr/bin/flood && \
 	echo "**** cleanup ****" && \
 	apk del --purge \
 		build-dependencies && \
