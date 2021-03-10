@@ -43,10 +43,10 @@ RUN \
 # add local files
 COPY root/ /
 
-# healthcheck
+# qbittorrent healthcheck
 HEALTHCHECK --start-period=10s --interval=30s \
 	CMD healthcheck
 
 # ports and volumes
-VOLUME /config
+VOLUME /config /downloads
 EXPOSE 3000 8080

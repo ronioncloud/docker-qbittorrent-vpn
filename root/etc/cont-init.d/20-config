@@ -13,7 +13,7 @@ if [ -n ${OPENVPN_USERNAME} ] && [ -n ${OPENVPN_PASSWORD} ]; then
 	printf "${OPENVPN_USERNAME}\n${OPENVPN_PASSWORD}" >/config/openvpn/credentials.txt
 elif [ ! -f /config/openvpn/credentials.txt ]; then
 	printf "username\npassword" >/config/openvpn/credentials.txt
-	echo "OpenVPN username and password was not specified in the 'OPENVPN_USERNAME' or 'OPENVPN_PASSWORD' variables. Set these variables or modify the '/config/openvpn/credentials.txt' file."
+	echo "OpenVPN username or password was not specified in the 'OPENVPN_USERNAME' or 'OPENVPN_PASSWORD' variables."
 	sleep infinity
 fi
 
@@ -26,7 +26,7 @@ echo "nameserver ${DNS}" >/etc/resolv.conf
 # permissions
 chown -R abc:abc \
 	/config \
-	/var/run/openvpn
-chmod 600 /config/openvpn/credentials.txt
+	/var/run/openvpn \
+	/downloads
 chmod -fR a=,ug+rwX \
 	/var/run/openvpn || :
