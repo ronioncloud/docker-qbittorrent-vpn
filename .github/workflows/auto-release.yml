@@ -25,7 +25,7 @@ jobs:
                "tag_name": "'${VERSION}'",
                "target_commitish": "'${main}'",
                "name": "'${VERSION}'",
-               "body": "Upgrading qBittorrent '${OLD_VERSION}' to '${VERSION}'",
+               "body": "Upgrading qBittorrent '${OLD_VERSION}' to '${VERSION}' \n[Changelog](https://github.com/qbittorrent/qbittorrent/releases/tag/release-$(echo $VERSION | sed "s/-r.*//g"))",
                "draft": false,
                "prerelease": false
           }' >releasebody.json
