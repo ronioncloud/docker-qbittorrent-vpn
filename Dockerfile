@@ -12,7 +12,7 @@ ENV QBT_WEBUI_PORT=8080 \
 	DNS=1.1.1.1 \
 	S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
-RUN \
+RUN set -xe && \
 	echo "**** install build packages ****" && \
 	apk add --no-cache --virtual=build-dependencies \
 		curl \
