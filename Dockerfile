@@ -31,7 +31,7 @@ RUN set -xe && \
 			awk '/^P:qbittorrent-nox$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
 	fi && \
 	apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-		qbittorrent-nox && \
+		qbittorrent-nox=="${VERSION}" && \
 	setcap cap_net_admin+ep "$(which openvpn)" && \
 	echo "abc ALL=(ALL) NOPASSWD: /sbin/ip" >>/etc/sudoers && \
 	echo "**** cleanup ****" && \
