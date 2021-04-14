@@ -42,7 +42,7 @@ Name               | Description                                                
 
 ## Upgrading qBittorrent
 
-To upgrade, all you have to do is pull the latest Docker image. We automatically check for qBittorrent updates every hour. When a new version is released, we build and publish an image both as a version tag and on `:latest`.
+To upgrade, all you have to do is pull the latest Docker image. We automatically check for qBittorrent updates daily. When a new version is released, we build and publish an image both as a version tag and on `:latest`.
 
 ## Fixing Appdata Permissions
 
