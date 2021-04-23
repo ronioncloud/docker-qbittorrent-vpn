@@ -26,7 +26,7 @@ RUN set -xe && \
 		openvpn \
 		subversion \
 		sudo && \
-	if [ -z ${VERSION+x} ]; then \
+	if [ -z ${VERSION} ]; then \
 		VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp && \
 			awk '/^P:qbittorrent-nox$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
 	fi && \
