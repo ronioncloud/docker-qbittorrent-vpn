@@ -24,7 +24,7 @@ iptables-1.8.7-r1
 jq-1.6-r1
 libacl-2.2.53-r0
 libattr-2.5.1-r0
-libblkid-2.37-r4
+libblkid-2.37.1-r0
 libbsd-0.11.3-r0
 libbz2-1.0.8-r1
 libc-utils-0.7.2-r3
@@ -37,7 +37,7 @@ libice-1.0.10-r0
 libintl-0.21-r0
 libmd-1.0.3-r0
 libmnl-1.0.4-r2
-libmount-2.37-r4
+libmount-2.37.1-r0
 libnftnl-libs-1.2.0-r0
 libpcre2-16-10.37-r0
 libproc-3.3.17-r0
@@ -47,7 +47,7 @@ libsm-1.2.3-r0
 libssl1.1-1.1.1k-r1
 libstdc++-10.3.1_git20210625-r0
 libtorrent-rasterbar-1.2.14-r0
-libuuid-2.37-r4
+libuuid-2.37.1-r0
 libx11-1.7.2-r0
 libxau-1.0.9-r0
 libxcb-1.14-r2
@@ -67,7 +67,7 @@ oniguruma-6.9.7.1-r0
 openvpn-2.5.3-r0
 pcre-8.45-r0
 procps-3.3.17-r0
-qbittorrent-nox-4.3.1-r2
+qbittorrent-nox-4.3.6-r0
 qt5-qtbase-5.15.3_git20210713-r0
 readline-8.1.0-r0
 s6-ipcserver-2.10.0.3-r0
